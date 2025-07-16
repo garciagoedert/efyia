@@ -1,0 +1,20 @@
+<svg width="150" height="40" viewBox="0 0 150 40" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        .text { 
+            font-family: Arial, sans-serif; 
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .primary { 
+            fill: #ff0033;
+            font-size: 28px;
+        }
+        .secondary { 
+            fill: #ffffff;
+            font-size: 28px;
+        }
+    </style>
+    <rect width="150" height="40" fill="transparent"/>
+    <text x="10" y="30" class="text primary">AT</text>
+    <text x="55" y="30" class="text secondary">Célere</text>
+</svg>

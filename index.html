@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efyia | Inteligência Contábil e Tributária para Empresas</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Custom styles for the accordion (FAQ) */
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details .icon { transition: transform 0.3s ease-in-out; }
+        details[open] .icon { transform: rotate(45deg); }
+        details[open] { background-color: #fdfcf9; }
+        
+        /* Animation for elements on scroll */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Carousel Styles */
+        .carousel-container {
+            width: 100%;
+            position: relative;
+        }
+        .carousel-viewport {
+            overflow: hidden;
+            width: 100%;
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-slide {
+            flex-shrink: 0;
+            width: 100%; /* Para mobile */
+            box-sizing: border-box;
+            padding: 0 0.75rem;
+        }
+        @media (min-width: 768px) { /* md */
+            .carousel-slide {
+                width: 50%;
+            }
+        }
+        @media (min-width: 1024px) { /* lg */
+            .carousel-slide {
+                width: 50%; /* Mostra 2 por vez em telas grandes */
+            }
+        }
+        .testimonial-card {
+            background-color: #f7f5f2; /* bg-[#f7f5f2] */
+            border-left: 4px solid #ba9a21; /* border-[#ba9a21] */
+            height: 100%;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        /* Arrow Styles */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%) scale(0.9);
+            background-color: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(4px);
+            border: 1px solid #e7e5e4; /* border-stone-200 */
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .carousel-arrow:hover {
+            transform: translateY(-50%) scale(1);
+            background-color: #ba9a21; /* bg-[#ba9a21] */
+            border-color: #ba9a21;
+        }
+        .carousel-arrow:hover svg {
+            stroke: #321710; /* text-[#321710] */
+        }
+        .carousel-arrow.prev {
+            left: -20px;
+        }
+        .carousel-arrow.next {
+            right: -20px;
+        }
+        @media (max-width: 640px) {
+            .carousel-arrow { display: none; } /* Esconde as setas em mobile */
+        }
+    </style>
+</head>
+<body class="bg-[#f7f5f2] text-[#321710]">
+
+    <!-- ========== HEADER ========== -->
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-3">
+                <svg class="h-8 w-auto text-[#321710]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                </svg>
+                <span class="text-2xl font-bold text-[#321710]">Efyía</span>
+            </a>
+            <a href="#form-contato" class="hidden sm:inline-block bg-[#321710] text-white font-bold py-2 px-5 rounded-full hover:bg-black transition-all duration-300 transform hover:scale-105">
+                Pedir Diagnóstico Gratuito
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- ========== HERO SECTION ========== -->
+        <section class="relative overflow-hidden">
+            <!-- Background Image -->
+            <div class="absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1554629947-334ff61d85dc?q=80&w=1974&auto=format&fit=crop" 
+                     alt="Fundo arquitetônico moderno" 
+                     class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-white/75"></div> <!-- Overlay para legibilidade -->
+            </div>
+
+            <!-- Content -->
+            <div class="container mx-auto px-6 py-24 md:py-32 text-center z-10 relative">
+                <h2 class="text-4xl md:text-6xl font-black text-[#321710] leading-tight mb-4">
+                    Mais do que contabilidade tradicional.
+                    <br class="hidden md:block">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-[#ba9a21] to-[#f9c648]">
+                        Transformamos números em decisões inteligentes.
+                    </span>
+                </h2>
+                <p class="max-w-3xl mx-auto text-lg md:text-xl text-[#6b4f44] mb-10">
+                    Com precisão técnica e visão estratégica, a Efyía é a parceira certa para gerar valor real para o seu negócio.
+                </p>
+                <a href="#form-contato" class="bg-[#321710] text-white font-bold py-4 px-10 rounded-full text-lg hover:bg-black transition-all duration-300 transform hover:scale-105 inline-block shadow-lg hover:shadow-xl">
+                    Quero o meu Diagnóstico Gratuito
+                </a>
+            </div>
+        </section>
+
+        <!-- ========== PROBLEM & AGITATION SECTION ========== -->
+        <section class="py-20 md:py-28 bg-[#f7f5f2]">
+            <div class="container mx-auto px-6 text-center fade-in-section">
+                <h3 class="text-3xl md:text-4xl font-extrabold text-[#321710] mb-5">A sua contabilidade atual limita o seu potencial?</h3>
+                <p class="max-w-2xl mx-auto text-lg text-[#6b4f44] mb-16">Se o seu dia a dia se parece com isto, está na altura de ter um parceiro estratégico.</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                     <!-- Card 1: Impostos em Excesso -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-2xl bg-[#c47e5a]/20 text-[#905f42] mx-auto mb-5">
+                            <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.75A.75.75 0 013 4.5h.75m0 0h.75A.75.75 0 015.25 6v.75m0 0v-.75A.75.75 0 016 5.25h.75M3.75 9v.75A.75.75 0 013 10.5h-.75m0 0v-.75A.75.75 0 013 9h.75m0 0h.75a.75.75 0 01.75.75v.75m0 0v-.75a.75.75 0 01.75-.75h.75m-6 3.75v.75A.75.75 0 013 15h-.75m0 0v-.75a.75.75 0 01.75-.75H3m0 0h.75A.75.75 0 014.5 15v.75m0 0v-.75a.75.75 0 01.75-.75h.75m-6 3.75v.75a.75.75 0 01-.75.75H3m0 0v-.75a.75.75 0 01.75-.75h.75M6.75 12h.75a.75.75 0 01.75.75v.75m0 0v-.75a.75.75 0 01.75-.75h.75m-3 3.75h.75a.75.75 0 01.75.75v.75m0 0v-.75a.75.75 0 01.75-.75h.75m-3 3.75h.75a.75.75 0 01.75.75v.75m0 0v-.75a.75.75 0 01.75-.75h.75M12 12h-1.5v4.5h1.5V12z" />
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-lg text-[#321710] mb-2">Impostos em Excesso</h4>
+                        <p class="text-[#6b4f44]">Receia pagar mais impostos do que o necessário por falta de um planeamento tributário inteligente?</p>
+                    </div>
+                    <!-- Card 2: Decisões no Escuro -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-2xl bg-[#c47e5a]/20 text-[#905f42] mx-auto mb-5">
+                            <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-lg text-[#321710] mb-2">Decisões no Escuro</h4>
+                        <p class="text-[#6b4f44]">A falta de relatórios financeiros claros impede a sua tomada de decisão ágil e estratégica?</p>
+                    </div>
+                    <!-- Card 3: Horas Perdidas -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-2xl bg-[#c47e5a]/20 text-[#905f42] mx-auto mb-5">
+                            <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L19.5 9" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25L18 11.25" />
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-lg text-[#321710] mb-2">Horas Perdidas</h4>
+                        <p class="text-[#6b4f44]">Luta com burocracia e tarefas operacionais que roubam o foco do seu core business?</p>
+                    </div>
+                    <!-- Card 4: Falta de Sintonia -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-2xl bg-[#c47e5a]/20 text-[#905f42] mx-auto mb-5">
+                            <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-lg text-[#321710] mb-2">Falta de Sintonia</h4>
+                        <p class="text-[#6b4f44]">Sente que o seu contador não compreende a velocidade e as particularidades do seu negócio?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== SOLUTION SECTION (3 PILLARS) ========== -->
+        <section class="bg-white py-20 md:py-28">
+            <div class="container mx-auto px-6 fade-in-section">
+                <div class="text-center mb-16">
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-[#321710] mb-4">Uma atuação estratégica em 3 pilares fundamentais.</h3>
+                    <p class="max-w-3xl mx-auto text-lg text-[#6b4f44]">Oferecemos uma atuação completa para garantir a saúde financeira e o crescimento sustentável da sua empresa.</p>
+                </div>
+                
+                <div class="max-w-5xl mx-auto space-y-12">
+                    <!-- Pillar 1: Tributário e Fiscal -->
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="flex-shrink-0 h-20 w-20 rounded-2xl bg-[#f9c648]/20 text-[#ba9a21] flex items-center justify-center">
+                            <svg class="h-10 w-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold text-[#321710] mb-2">Área Tributária e Fiscal</h4>
+                            <p class="text-[#6b4f44] text-lg">Identificamos oportunidades de economia e correções que evitam autuações e reduzem a carga tributária de forma segura.</p>
+                        </div>
+                    </div>
+                    <!-- Pillar 2: Contábil e Trabalhista -->
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="flex-shrink-0 h-20 w-20 rounded-2xl bg-[#f9c648]/20 text-[#ba9a21] flex items-center justify-center">
+                            <svg class="h-10 w-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-4.67c.12-.24.232-.487.34-.737m-1.06-2.053a6.375 6.375 0 00-5.924-4.58 6.375 6.375 0 00-5.924 4.58m11.848 0c.081.24.155.487.22.737m0 0a6.375 6.375 0 01-11.964 2.053m11.964 0A12.318 12.318 0 008.624 6c-2.331 0-4.512.645-6.374 1.766l-.001.109a6.375 6.375 0 0011.964 4.67c.12.24.232-.487.34.737m-1.06 2.053a6.375 6.375 0 01-5.924 4.58 6.375 6.375 0 01-5.924-4.58m11.848 0c-.081-.24-.155-.487-.22-.737m0 0a6.375 6.375 0 00-11.964-2.053" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold text-[#321710] mb-2">Setor Contábil e Trabalhista</h4>
+                            <p class="text-[#6b4f44] text-lg">Oferecemos total suporte à gestão de contratos, admissões, rescisões, cálculos e escrituração contábil, garantindo conformidade e eficiência.</p>
+                        </div>
+                    </div>
+                    <!-- Pillar 3: Legalização Empresarial -->
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="flex-shrink-0 h-20 w-20 rounded-2xl bg-[#f9c648]/20 text-[#ba9a21] flex items-center justify-center">
+                           <svg class="h-10 w-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold text-[#321710] mb-2">Legalização Empresarial</h4>
+                            <p class="text-[#6b4f44] text-lg">Conduzimos desde a abertura até alterações societárias e emissão de licenças, com todo o suporte necessário junto aos órgãos públicos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== VIDEO & ABOUT SECTION ========== -->
+        <section class="py-20 md:py-28 bg-[#f7f5f2]">
+            <div class="container mx-auto px-6 fade-in-section">
+                <div class="text-center mb-16">
+                     <h3 class="text-3xl md:text-4xl font-extrabold text-[#321710] mb-4">Conheça quem está por trás da sua estratégia.</h3>
+                    <p class="max-w-2xl mx-auto text-lg text-[#6b4f44]">Somos mais do que contadores, somos parceiros do seu crescimento.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
+                    <!-- Coluna do Vídeo -->
+                    <div class="max-w-sm mx-auto lg:mx-0 bg-[#321710] rounded-3xl p-3 shadow-2xl w-full">
+                        <div class="aspect-[9/16] bg-[#4d342a] rounded-2xl flex items-center justify-center">
+                            <!-- Placeholder for vertical video -->
+                            <button class="text-white/70 hover:text-white transition-colors">
+                                <svg class="h-20 w-20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Coluna "Sobre" -->
+                    <div class="text-center lg:text-left">
+                        <h4 class="text-2xl font-bold text-[#321710] mb-4">Inteligência Humana, Foco no Cliente.</h4>
+                        <p class="text-[#6b4f44] text-lg mb-4">
+                            Na Efyía, acreditamos que a verdadeira inteligência contábil nasce da combinação entre tecnologia de ponta e a experiência de especialistas dedicados. Por trás de cada relatório e de cada estratégia, existe uma equipa que se aprofunda no seu negócio para entender as suas metas e desafios únicos.
+                        </p>
+                        <p class="text-[#6b4f44] text-lg">
+                            Não nos limitamos a entregar números. O nosso compromisso é traduzir dados complexos em insights claros e acionáveis, oferecendo a si a tranquilidade e a confiança necessárias para tomar as melhores decisões e focar no que realmente importa: o crescimento sustentável da sua empresa.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========== AUTHORITY & SOCIAL PROOF SECTION ========== -->
+        <section class="py-20 md:py-28 bg-white">
+            <div class="container mx-auto px-6 fade-in-section">
+                <div class="text-center mb-16">
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-[#321710] mb-4">Confiança Comprovada</h3>
+                    <p class="max-w-2xl mx-auto text-lg text-[#6b4f44]">Veja o que os nossos clientes dizem sobre a nossa parceria.</p>
+                </div>
+                <div id="carousel" class="max-w-5xl mx-auto carousel-container">
+                    <div class="carousel-viewport">
+                        <div class="carousel-track">
+                            <!-- Slide 1 -->
+                            <div class="carousel-slide">
+                                <div class="testimonial-card p-8 rounded-lg shadow-lg">
+                                    <blockquote class="text-[#6b4f44] text-lg italic mb-6">"A abordagem da Efyía mudou o jogo para nós. Pela primeira vez, conseguimos visualizar exatamente onde a nossa operação perdia dinheiro e onde poderíamos inovar. Essencial para quem quer sair da briga por preço."</blockquote>
+                                    <div class="flex items-center mt-auto">
+                                        <img src="https://placehold.co/100x100/ba9a21/321710?text=S" class="w-14 h-14 rounded-full mr-4 border-2 border-[#ba9a21]" alt="Foto de Sofia Martins">
+                                        <div>
+                                            <p class="font-bold text-[#321710] text-lg">Sofia Martins</p>
+                                            <p class="text-[#905f42]">CEO & Fundadora, InovaTech SaaS</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Slide 2 -->
+                            <div class="carousel-slide">
+                                <div class="testimonial-card p-8 rounded-lg shadow-lg">
+                                    <blockquote class="text-[#6b4f44] text-lg italic mb-6">"Finalmente saí da estagnação e dobrei meu faturamento. A Efyía me deu a clareza estratégica que faltava para reposicionar minha agência e atrair clientes de maior valor. Foi um verdadeiro divisor de águas."</blockquote>
+                                    <div class="flex items-center mt-auto">
+                                        <img src="https://placehold.co/100x100/ba9a21/321710?text=M" class="w-14 h-14 rounded-full mr-4 border-2 border-[#ba9a21]" alt="Foto de Marcos Andrade">
+                                        <div>
+                                            <p class="font-bold text-[#321710] text-lg">Marcos Andrade</p>
+                                            <p class="text-[#905f42]">Diretor, Agência Criativa</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Slide 3 -->
+                            <div class="carousel-slide">
+                                <div class="testimonial-card p-8 rounded-lg shadow-lg">
+                                    <blockquote class="text-[#6b4f44] text-lg italic mb-6">"O diagnóstico tributário da Efyía foi um divisor de águas. Identificaram créditos que nem sabíamos que existiam e otimizaram nosso regime fiscal. É como ter um sócio focado em nossa lucratividade, não apenas um contador."</blockquote>
+                                    <div class="flex items-center mt-auto">
+                                        <img src="https://placehold.co/100x100/ba9a21/321710?text=C" class="w-14 h-14 rounded-full mr-4 border-2 border-[#ba9a21]" alt="Foto de Carlos Pereira">
+                                        <div>
+                                            <p class="font-bold text-[#321710] text-lg">Carlos Pereira</p>
+                                            <p class="text-[#905f42]">Dono de E-commerce</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                             <!-- Slide 4 -->
+                            <div class="carousel-slide">
+                                <div class="testimonial-card p-8 rounded-lg shadow-lg">
+                                    <blockquote class="text-[#6b4f44] text-lg italic mb-6">"Leitura obrigatória para qualquer um que se sinta estagnado. A Efyía é uma lufada de ar fresco, cheia de insights acionáveis que realmente fazem a diferença no dia a dia."</blockquote>
+                                    <div class="flex items-center mt-auto">
+                                        <img src="https://placehold.co/100x100/ba9a21/321710?text=A" class="w-14 h-14 rounded-full mr-4 border-2 border-[#ba9a21]" alt="Foto de Ana Lima">
+                                        <div>
+                                            <p class="font-bold text-[#321710] text-lg">Ana Lima</p>
+                                            <p class="text-[#905f42]">Consultora de Marketing</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Setas de Navegação -->
+                    <button id="prev-btn" class="carousel-arrow prev">
+                        <svg class="w-6 h-6 stroke-current text-[#905f42]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="next-btn" class="carousel-arrow next">
+                        <svg class="w-6 h-6 stroke-current text-[#905f42]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== CONVERSION SECTION (FORM) ========== -->
+        <section id="form-contato" class="bg-[#321710] text-white py-20 md:py-28">
+            <div class="container mx-auto px-6 fade-in-section">
+                <div class="max-w-2xl mx-auto text-center">
+                    <h3 class="text-3xl md:text-4xl font-extrabold mb-4">Pronto para transformar a sua gestão financeira?</h3>
+                    <p class="text-lg text-stone-300 mb-10">Preencha o formulário e agende o seu diagnóstico gratuito. Vamos entender as suas metas e mostrar como a contabilidade pode ser a alavanca para o seu sucesso.</p>
+
+                    <form id="lead-form" class="bg-white text-[#321710] p-8 rounded-2xl shadow-2xl text-left">
+                        <div class="space-y-6">
+                            <div>
+                                <label for="nome" class="block text-sm font-medium text-[#6b4f44] mb-1">Nome Completo</label>
+                                <input type="text" id="nome" name="nome" required class="mt-1 block w-full px-4 py-3 bg-stone-100 border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9a21] focus:bg-white transition">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-[#6b4f44] mb-1">Email Profissional</label>
+                                <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-3 bg-stone-100 border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9a21] focus:bg-white transition">
+                            </div>
+                            <div>
+                                <label for="empresa" class="block text-sm font-medium text-[#6b4f44] mb-1">Nome da Empresa</label>
+                                <input type="text" id="empresa" name="empresa" required class="mt-1 block w-full px-4 py-3 bg-stone-100 border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ba9a21] focus:bg-white transition">
+                            </div>
+                        </div>
+                        <div class="mt-8">
+                            <button type="submit" id="submit-button" class="w-full bg-[#321710] text-white font-bold py-4 px-4 rounded-lg text-lg hover:bg-black transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:scale-105">
+                                Agendar meu Diagnóstico Gratuito
+                            </button>
+                        </div>
+                        <p class="text-xs text-stone-500 mt-4 text-center flex items-center justify-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" /></svg>
+                            As suas informações estão 100% seguras.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== FAQ SECTION ========== -->
+        <section id="faq" class="py-20 md:py-28 bg-white">
+            <div class="container mx-auto px-6 fade-in-section">
+                <div class="text-center mb-16">
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-[#321710] mb-4">Ainda tem dúvidas?</h3>
+                    <p class="max-w-2xl mx-auto text-lg text-[#6b4f44]">Encontre aqui as respostas para as perguntas mais comuns.</p>
+                </div>
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <!-- FAQ 1 -->
+                    <details class="p-6 bg-white rounded-xl border border-stone-200 cursor-pointer group transition-all duration-300 hover:border-[#ba9a21]" open>
+                        <summary class="flex justify-between items-center font-bold text-lg text-[#321710]">
+                            A Efyía atende empresas do meu tamanho?
+                            <svg class="icon h-6 w-6 text-stone-500 group-hover:text-[#ba9a21]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                        </summary>
+                        <p class="text-[#6b4f44] mt-4 pt-4 border-t border-stone-200">Sim. Somos especialistas em atender desde startups em fase inicial, que precisam de uma estruturação correta desde o primeiro dia, até PMEs já consolidadas que buscam mais eficiência e inteligência fiscal.</p>
+                    </details>
+                    <!-- FAQ 2 -->
+                    <details class="p-6 bg-white rounded-xl border border-stone-200 cursor-pointer group transition-all duration-300 hover:border-[#ba9a21]">
+                        <summary class="flex justify-between items-center font-bold text-lg text-[#321710]">
+                            O processo de troca de contador é complicado?
+                            <svg class="icon h-6 w-6 text-stone-500 group-hover:text-[#ba9a21]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                        </summary>
+                        <p class="text-[#6b4f44] mt-4 pt-4 border-t border-stone-200">De forma alguma. A nossa equipa cuida de 100% do processo de migração. Entramos em contato com a sua contabilidade anterior e tratamos de toda a burocracia para que a sua transição seja tranquila e impercetível para a sua operação.</p>
+                    </details>
+                    <!-- FAQ 3 -->
+                    <details class="p-6 bg-white rounded-xl border border-stone-200 cursor-pointer group transition-all duration-300 hover:border-[#ba9a21]">
+                        <summary class="flex justify-between items-center font-bold text-lg text-[#321710]">
+                            Quando devo revisar o regime tributário da minha empresa?
+                            <svg class="icon h-6 w-6 text-stone-500 group-hover:text-[#ba9a21]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                        </summary>
+                        <p class="text-[#6b4f44] mt-4 pt-4 border-t border-stone-200">A revisão deve ser feita anualmente, ou sempre que houver uma mudança significativa no seu faturamento, estrutura de custos ou modelo de negócio. Uma revisão proativa pode gerar uma economia substancial em impostos.</p>
+                    </details>
+                     <!-- FAQ 4 -->
+                    <details class="p-6 bg-white rounded-xl border border-stone-200 cursor-pointer group transition-all duration-300 hover:border-[#ba9a21]">
+                        <summary class="flex justify-between items-center font-bold text-lg text-[#321710]">
+                            Como funciona o BPO Financeiro na prática?
+                            <svg class="icon h-6 w-6 text-stone-500 group-hover:text-[#ba9a21]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                        </summary>
+                        <p class="text-[#6b4f44] mt-4 pt-4 border-t border-stone-200">Assumimos as suas rotinas financeiras, como gestão de contas a pagar e a receber, emissão de notas fiscais e conciliação bancária. Você aprova os pagamentos e nós executamos. O resultado é mais tempo livre para si e relatórios financeiros precisos para a sua gestão.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-[#321710] text-stone-300">
+        <div class="container mx-auto px-6 py-12 text-center">
+            <p class="font-bold text-xl text-white">Efyía Inteligência Contábil e Tributária</p>
+            <p class="text-stone-400 mt-2">Há 5 anos ajudando empresas a revisar o regime fiscal e identificar benefícios legais que reduzem a carga tributária.</p>
+            <p class="text-sm text-stone-500 mt-6">&copy; 2024 Efyía Contabilidade. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- FORM SUBMISSION LOGIC ---
+        const whatsappNumber = '5548999998888'; // Insira o número de WhatsApp aqui
+
+        const form = document.getElementById('lead-form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const empresa = document.getElementById('empresa').value;
+            const whatsappMessage = `Olá! Tenho interesse no diagnóstico gratuito da Efyía.\n\n*Nome:* ${nome}\n*Empresa:* ${empresa}\n*Email:* ${email}`;
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            window.location.href = whatsappUrl;
+        });
+
+        // --- SCROLL ANIMATION LOGIC ---
+        const sections = document.querySelectorAll('.fade-in-section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        sections.forEach(section => { observer.observe(section); });
+
+        // --- ACCORDION LOGIC FOR FAQ ---
+        const faqItems = document.querySelectorAll('#faq details');
+        faqItems.forEach((item) => {
+            item.addEventListener('toggle', () => {
+                if (item.open) {
+                    faqItems.forEach((otherItem) => {
+                        if (otherItem !== item && otherItem.open) {
+                            otherItem.open = false;
+                        }
+                    });
+                }
+            });
+        });
+
+        // --- CAROUSEL LOGIC ---
+        document.addEventListener('DOMContentLoaded', function () {
+            const carousel = document.querySelector('#carousel');
+            if (!carousel) return;
+
+            const track = carousel.querySelector('.carousel-track');
+            const prevBtn = carousel.querySelector('#prev-btn');
+            const nextBtn = carousel.querySelector('#next-btn');
+            
+            let originalSlides = Array.from(track.children);
+            let isMoving = false;
+            let autoPlayInterval;
+            let currentIndex; 
+
+            function getSlidesPerView() {
+                if (window.innerWidth >= 1024) return 2;
+                if (window.innerWidth >= 768) return 2;
+                return 1;
+            }
+
+            function setupCarousel() {
+                stopAutoPlay();
+                isMoving = false;
+                
+                const slidesPerView = getSlidesPerView();
+                
+                track.innerHTML = '';
+                originalSlides.forEach(slide => track.appendChild(slide.cloneNode(true)));
+                
+                const allSlides = Array.from(track.children);
+
+                // Clonagem para loop infinito
+                for (let i = 0; i < slidesPerView; i++) {
+                    const cloneEnd = allSlides[i].cloneNode(true);
+                    track.appendChild(cloneEnd);
+                }
+                for (let i = allSlides.length - 1; i >= allSlides.length - slidesPerView; i--) {
+                    const cloneStart = allSlides[i].cloneNode(true);
+                    track.insertBefore(cloneStart, track.firstChild);
+                }
+                
+                currentIndex = slidesPerView;
+                updatePosition(true);
+                
+                startAutoPlay();
+            }
+            
+            function updatePosition(instant = false) {
+                const slideWidth = track.querySelector('.carousel-slide').getBoundingClientRect().width;
+                const newPosition = -currentIndex * slideWidth;
+                
+                track.style.transition = instant ? 'none' : 'transform 0.5s ease-in-out';
+                track.style.transform = `translateX(${newPosition}px)`;
+            }
+
+            function shiftSlide(direction) {
+                if (isMoving) return;
+                isMoving = true;
+                
+                currentIndex += direction;
+                updatePosition();
+
+                track.addEventListener('transitionend', () => {
+                    isMoving = false;
+                    const slidesPerView = getSlidesPerView();
+                    const totalOriginalSlides = originalSlides.length;
+
+                    if (currentIndex >= totalOriginalSlides + slidesPerView) {
+                        currentIndex = slidesPerView;
+                        updatePosition(true);
+                    }
+                    if (currentIndex < slidesPerView) {
+                       currentIndex = totalOriginalSlides + slidesPerView -1;
+                       updatePosition(true);
+                    }
+                }, { once: true });
+            }
+
+            function startAutoPlay() {
+                stopAutoPlay();
+                autoPlayInterval = setInterval(() => shiftSlide(1), 5000);
+            }
+
+            function stopAutoPlay() {
+                clearInterval(autoPlayInterval);
+            }
+
+            nextBtn.addEventListener('click', () => shiftSlide(1));
+            prevBtn.addEventListener('click', () => shiftSlide(-1));
+
+            carousel.addEventListener('mouseenter', stopAutoPlay);
+            carousel.addEventListener('mouseleave', startAutoPlay);
+            
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                stopAutoPlay();
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(setupCarousel, 250);
+            });
+
+            setupCarousel();
+        });
+    </script>
+
+</body>
+</html>
